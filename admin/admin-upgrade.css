@@ -1,0 +1,265 @@
+/* =========================================================
+   ROASCE ADMIN — UPGRADE VISUAL (camada extra)
+   Carregado DEPOIS do admin.css. Não altera JS, IDs nem
+   estrutura: para voltar ao visual antigo, basta remover
+   o <link> deste arquivo no admin/index.html.
+========================================================= */
+
+:root {
+    --bg: #03070d;
+    --bg-secondary: #060d17;
+    --card: #0a1625;
+    --card-secondary: #07111e;
+    --border: #16324f;
+    --blue: #2b8cff;
+    --cyan: #3ee6ff;
+    --white: #f3f7fc;
+    --text: #a9bacb;
+    --muted: #70869c;
+
+    --up-radius: 18px;
+    --up-radius-sm: 12px;
+    --up-line: rgba(120, 190, 255, .12);
+    --up-line-strong: rgba(62, 230, 255, .35);
+    --up-glass: linear-gradient(160deg, rgba(18, 36, 60, .72), rgba(8, 17, 30, .86));
+    --up-shadow: 0 1px 0 rgba(255, 255, 255, .04) inset, 0 18px 40px -22px rgba(0, 0, 0, .85);
+    --up-glow: 0 0 0 1px var(--up-line-strong), 0 12px 36px -14px rgba(43, 140, 255, .55);
+    --up-ease: cubic-bezier(.2, .7, .2, 1);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    background:
+        radial-gradient(900px 480px at 8% -8%, rgba(43, 140, 255, .16), transparent 60%),
+        radial-gradient(760px 420px at 100% 0%, rgba(62, 230, 255, .09), transparent 60%),
+        var(--bg);
+    background-attachment: fixed;
+    font-feature-settings: "cv11", "ss01";
+    letter-spacing: -.003em;
+}
+
+::selection { background: rgba(62, 230, 255, .28); color: #fff; }
+
+/* Scrollbars */
+* { scrollbar-width: thin; scrollbar-color: #1f4a75 transparent; }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: #1b4167; border-radius: 10px; border: 2px solid transparent; background-clip: content-box; }
+::-webkit-scrollbar-thumb:hover { background: #2a5f97; background-clip: content-box; border: 2px solid transparent; }
+
+/* Foco acessível */
+:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; border-radius: 8px; }
+
+/* ---------- LOGIN ---------- */
+.login-card {
+    background: var(--up-glass);
+    border: 1px solid var(--up-line);
+    border-radius: 24px;
+    box-shadow: var(--up-shadow), 0 40px 90px -30px rgba(43, 140, 255, .35);
+    backdrop-filter: blur(18px);
+}
+.login-button {
+    background: linear-gradient(135deg, #2b8cff, #19c4ec) !important;
+    border: 0 !important;
+    color: #02111f !important;
+    font-weight: 700;
+    border-radius: var(--up-radius-sm) !important;
+    box-shadow: 0 10px 28px -10px rgba(43, 140, 255, .8);
+    transition: transform .2s var(--up-ease), box-shadow .2s var(--up-ease), filter .2s;
+}
+.login-button:hover { transform: translateY(-1px); filter: brightness(1.08); }
+
+/* ---------- HEADER ---------- */
+.admin-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(4, 9, 16, .72);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    border-bottom: 1px solid var(--up-line);
+}
+.logout-button {
+    border-radius: 999px;
+    border: 1px solid var(--up-line);
+    background: rgba(255, 255, 255, .03);
+    color: var(--text);
+    transition: all .2s var(--up-ease);
+}
+.logout-button:hover { border-color: rgba(255, 110, 130, .5); color: #ff9aa9; background: rgba(255, 90, 110, .08); }
+
+/* ---------- ABAS ---------- */
+.admin-tabs {
+    background: rgba(8, 17, 30, .7);
+    border: 1px solid var(--up-line);
+    border-radius: 999px;
+    padding: 5px;
+    backdrop-filter: blur(10px);
+}
+.admin-tab, .contacts-view-button {
+    border-radius: 999px;
+    border: 1px solid transparent;
+    transition: all .22s var(--up-ease);
+}
+.admin-tab:hover, .contacts-view-button:hover { color: var(--white); background: rgba(255, 255, 255, .04); }
+.admin-tab.active, .admin-tab.is-active,
+.contacts-view-button.active, .contacts-view-button.is-active {
+    color: #04131f;
+    background: linear-gradient(135deg, #3ee6ff, #2b8cff);
+    border-color: transparent;
+    box-shadow: 0 8px 22px -10px rgba(62, 230, 255, .7);
+}
+
+/* ---------- TÍTULOS DE SEÇÃO ---------- */
+.dashboard-overview-heading h2, .dashboard-overview-heading h3 { font-weight: 700; letter-spacing: -.02em; }
+
+/* ---------- CARDS / KPIs ---------- */
+.dashboard-metric-card, .admin-metric, .finance-metric {
+    position: relative;
+    overflow: hidden;
+    background: var(--up-glass);
+    border: 1px solid var(--up-line);
+    border-radius: var(--up-radius);
+    box-shadow: var(--up-shadow);
+    transition: transform .25s var(--up-ease), box-shadow .25s var(--up-ease), border-color .25s;
+}
+.dashboard-metric-card:hover, .admin-metric:hover, .finance-metric:hover {
+    transform: translateY(-3px);
+    border-color: var(--up-line-strong);
+    box-shadow: var(--up-glow);
+}
+.dashboard-metric-card strong, .dashboard-metric-card [class*="value"],
+.admin-metric strong, .finance-metric strong {
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -.03em;
+}
+
+/* Painéis grandes (gráficos, listas, auditoria, tabelas) */
+.dashboard-overview-grid > *, .finance-table, .contacts-list-toolbar,
+.modal-card, [class$="-panel"], [class*="-chart-card"], [class*="-list-card"] {
+    border-radius: var(--up-radius);
+}
+.finance-table, .contacts-list-toolbar {
+    background: var(--up-glass);
+    border: 1px solid var(--up-line);
+    box-shadow: var(--up-shadow);
+}
+
+/* ---------- CAMPOS ---------- */
+input:not([type="checkbox"]):not([type="radio"]), select, textarea {
+    background: rgba(5, 12, 22, .75);
+    border: 1px solid var(--up-line);
+    border-radius: var(--up-radius-sm);
+    color: var(--white);
+    transition: border-color .2s, box-shadow .2s, background .2s;
+}
+input:hover, select:hover, textarea:hover { border-color: rgba(120, 190, 255, .28); }
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--cyan);
+    box-shadow: 0 0 0 4px rgba(62, 230, 255, .14);
+    background: rgba(5, 14, 26, .95);
+}
+::placeholder { color: #4f657b; }
+
+/* ---------- BOTÕES ---------- */
+.manual-create-button, .new-contact-button, .save-status-button,
+.closing-confirm-button, .payment-confirm-button, .finance-mark-paid-button {
+    background: linear-gradient(135deg, #2b8cff, #19c4ec);
+    color: #031221;
+    border: 0;
+    font-weight: 700;
+    border-radius: var(--up-radius-sm);
+    box-shadow: 0 10px 26px -12px rgba(43, 140, 255, .85);
+    transition: transform .2s var(--up-ease), filter .2s, box-shadow .2s;
+}
+.manual-create-button:hover, .new-contact-button:hover, .save-status-button:hover,
+.closing-confirm-button:hover, .payment-confirm-button:hover, .finance-mark-paid-button:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.1);
+}
+.closing-cancel-button, .payment-cancel-button, .finance-edit-button,
+.finance-history-button, .archive-contact-button, .modal-action-button {
+    border-radius: var(--up-radius-sm);
+    transition: all .2s var(--up-ease);
+}
+.closing-cancel-button:hover, .payment-cancel-button:hover,
+.finance-edit-button:hover, .finance-history-button:hover { transform: translateY(-1px); border-color: var(--up-line-strong); }
+button:active { transform: translateY(0) scale(.985); }
+button:disabled { opacity: .5; cursor: not-allowed; transform: none; filter: none; }
+
+/* ---------- LISTA DE CONTATOS ---------- */
+.contact-row {
+    background: var(--up-glass);
+    border: 1px solid var(--up-line);
+    border-radius: var(--up-radius);
+    transition: transform .22s var(--up-ease), border-color .22s, box-shadow .22s;
+}
+.contact-row:hover {
+    transform: translateY(-2px);
+    border-color: var(--up-line-strong);
+    box-shadow: var(--up-glow);
+}
+
+/* ---------- ATIVIDADE / FOLLOW-UPS ---------- */
+.dashboard-activity-item, .dashboard-followup-item {
+    border-radius: var(--up-radius-sm);
+    transition: background .2s, transform .2s var(--up-ease), border-color .2s;
+}
+.dashboard-activity-item:hover, .dashboard-followup-item:hover {
+    background: rgba(62, 230, 255, .05);
+    border-color: var(--up-line-strong);
+}
+
+/* ---------- BADGES ---------- */
+.status-badge, .priority-badge, .dashboard-followup-badge, .payment-history-status {
+    border-radius: 999px;
+    font-weight: 600;
+    letter-spacing: .02em;
+    backdrop-filter: blur(6px);
+}
+
+/* ---------- STATUS AO VIVO ---------- */
+.live-status { border-radius: 999px; }
+
+/* ---------- MODAIS ---------- */
+.modal-overlay {
+    background: rgba(2, 6, 12, .66);
+    backdrop-filter: blur(10px) saturate(120%);
+    -webkit-backdrop-filter: blur(10px) saturate(120%);
+}
+.modal-card {
+    background: linear-gradient(170deg, #0d1c30, #070f1b);
+    border: 1px solid var(--up-line);
+    border-radius: 22px;
+    box-shadow: 0 50px 120px -30px rgba(0, 0, 0, .9), 0 0 0 1px rgba(255, 255, 255, .02) inset;
+    animation: up-pop .28s var(--up-ease);
+}
+.modal-close {
+    border-radius: 50%;
+    transition: all .2s var(--up-ease);
+}
+.modal-close:hover { background: rgba(255, 90, 110, .12); color: #ff9aa9; transform: rotate(90deg); }
+
+@keyframes up-pop {
+    from { opacity: 0; transform: translateY(14px) scale(.975); }
+    to   { opacity: 1; transform: none; }
+}
+
+/* ---------- ENTRADA SUAVE DAS TELAS ---------- */
+.admin-main > *, .dashboard-overview { animation: up-fade .45s var(--up-ease) both; }
+@keyframes up-fade {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: none; }
+}
+
+/* ---------- RESPONSIVO ---------- */
+@media (max-width: 720px) {
+    .admin-tabs { width: 100%; }
+    .admin-tab { flex: 1; }
+    .modal-card { border-radius: 18px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
